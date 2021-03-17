@@ -32,7 +32,19 @@ import java.io.File;
   - оздал и реализовал метод exit()
 
  Шаг 3.
+ 1. В классе View:
+  добавил поля:
+  - JTabbedPane tabbedPane - панель с двумя вкладками
+  - JTextPane htmlTextPane - компонент для визуального редактирования html. Он будет размещен на первой вкладке.
+  - JEditorPane plainTextPane - компонент для редактирования html в виде текста, он будет отображать код html (теги и их содержимое)
+ 2. Создал пакет listeners, в него добавил класс FrameListener.
+  Унаследовал его от WindowAdapter
+ 3. В классе FrameListener:
+  - добавил поле View view
+  - добавил конструктор с полем View
 
+ Шаг 4.
+ 1.
  */
 
 public class Controller {
