@@ -46,13 +46,24 @@ import java.io.File;
   Шаг 4.
   1. В классе View:
   объявил методы:
-  - initMenuBar() - инициализация меню
-  - initEditor() - инициализация панелей редактора
+   - initMenuBar() - инициализация меню
+   - initEditor() - инициализация панелей редактора
   2. Объявил и реализовал метод initGui() - инициализация графического интерфейса
   3. Реализовал метод init()
 
  Шаг 5.
+ 1. В пакете listeners:
+  - объявил класс TabbedPaneChangeListener реализующий интерфейс ChangeListener
+ 2. В классе View:
+  - добавил метод selectedTabChanged()
+ 3. В классе TabbedPaneChangeListener:
+  - добавил поле View view и конструктор с этим полем
+  - реализовал метод stateChanged()
+ 4. Создал класс ExceptionHandler, в нем создал и реализовал метод log(Exception e)
+
+ Шаг 6.
  1.
+
  */
 
 public class Controller {
