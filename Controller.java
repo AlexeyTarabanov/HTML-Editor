@@ -17,6 +17,22 @@ import java.io.File;
   - наследуется от JFrame и реализовывает интерфейс ActionListener
   - имплементировал метод actionPerformed()
   - добавил поле Controller controller, а также сеттер и геттер к нему.
+
+ Шаг 2.
+ 1. В классы Controller и View добавил методы init(), пока без реализаций
+ 2. В классе Controller, в методе main:
+  - создал объект представления (объект класса View)
+  - создал контроллер (объект класса Controller)
+  - установил у представления контроллер (view.setController(controller))
+  - инициализировал представление (init)
+  - инициализировал контроллер (init)
+ 3. В классе Controller:
+  - создал и реализовал метод exit()
+ 4. В классе:
+  - оздал и реализовал метод exit()
+
+ Шаг 3.
+
  */
 
 public class Controller {
@@ -32,7 +48,24 @@ public class Controller {
         this.view = view;
     }
 
+    // инициализирует
+    public void init() {}
+
+    public void exit() {
+        // exit - используется для завершения программы.
+        // Этот метод на вход принимает значение типа int.
+        // Обычно это 0, что говорит о том, что программа завершается без ошибок.
+        // Любое другое значение говорит о том, что программа завершилась с ошибкой
+        System.exit(0);
+    }
+
     public static void main(String[] args) {
 
+        View view = new View();
+        Controller controller = new Controller(view);
+
+        view.setController(controller);
+        view.init();
+        controller.init();
     }
 }
