@@ -62,8 +62,10 @@ import java.io.File;
  4. Создал класс ExceptionHandler, в нем создал и реализовал метод log(Exception e)
 
  Шаг 6.
- 1.
+ 1. В классе View реализовал метод initEditor()
 
+ Шаг 7.
+ 1.
  */
 
 public class Controller {

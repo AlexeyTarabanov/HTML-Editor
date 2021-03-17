@@ -1,8 +1,10 @@
 package com.javarush.task.task32.task3209;
 
 import com.javarush.task.task32.task3209.listeners.FrameListener;
+import com.javarush.task.task32.task3209.listeners.TabbedPaneChangeListener;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -43,7 +45,24 @@ public class View extends JFrame implements ActionListener {
     public void initMenuBar() {}
 
     // инициализация панелей редактора
-    public void initEditor() {}
+    public void initEditor() {
+        // установил значение "text/html" в качестве типа контента для компонента htmlTextPane
+        htmlTextPane.setContentType("text/html");
+        // создал новый локальный компонент JScrollPane на базе htmlTextPane
+        JScrollPane paneHTML = new JScrollPane(htmlTextPane);
+        // добавил вкладку в панель tabbedPane с именем "HTML" и компонентом из предыдущего пункта
+        tabbedPane.add("HTML", paneHTML);
+        // создал новый локальный компонент JScrollPane на базе plainTextPane
+        JScrollPane panePlain = new JScrollPane(plainTextPane);
+        // добавил вкладку в панель tabbedPane с именем "Текст" и компонентом из предыдущего пункта.
+        tabbedPane.add("Текст", panePlain);
+        // установил предпочтительный размер панели tabbedPane
+        tabbedPane.setPreferredSize(new Dimension());
+        // добавил объект класса TabbedPaneChangeListener и устанавил его в качестве слушателя изменений в tabbedPane
+        tabbedPane.addChangeListener(new TabbedPaneChangeListener(this));
+        // добавил по центру панели контента текущего фрейма нашу панель с вкладками
+        getContentPane().add(tabbedPane, BorderLayout.CENTER);
+    }
 
     // инициализация графического интерфейса
     public void initGui() {
