@@ -65,6 +65,22 @@ import java.io.File;
  1. В классе View реализовал метод initEditor()
 
  Шаг 7.
+ 1. Создал класс MenuHelper
+ (вспомогательный класс для инициализации и настройки меню)
+ 2. Объявил и реализовал методы:
+  - addMenuItem(JMenu parent, String text, ActionListener actionListener)
+  - addMenuItem(JMenu parent, Action action)
+  - addMenuItem(JMenu parent, String text, Action action)
+ 3. Создал методы:
+  - initHelpMenu(View view, JMenuBar menuBar) - инициализация меню помощи
+  - initFontMenu(View view, JMenuBar menuBar) - инициализация меню выбора шрифта
+  - initColorMenu(View view, JMenuBar menuBar) - инициализация меню выбора цвета
+  - initAlignMenu(View view, JMenuBar menuBar) - инициализация меню выравнивания
+  - initStyleMenu(View view, JMenuBar menuBar) - инициализация меню выбора стиля текста
+  - initEditMenu(View view, JMenuBar menuBar) - инициализация меню редактирования текста
+  - initFileMenu(View view, JMenuBar menuBar) - инициализация меню Файл
+
+ Шаг 8.
  1.
  */
 
