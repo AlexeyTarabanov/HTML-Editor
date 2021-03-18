@@ -103,6 +103,15 @@ public class View extends JFrame implements ActionListener {
         pack();
     }
 
+    // можем ли мы отменить действие
+    public boolean canUndo() {
+        return false;
+    }
+
+    public boolean  canRedo() {
+        return false;
+    }
+
     public void exit() {
         controller.exit();
     }

@@ -18,9 +18,12 @@ public class UndoMenuListener implements MenuListener {
         this.redoMenuItem = redoMenuItem;
     }
 
+    // Метод menuSelected(MenuEvent menuEvent)
+    // должен делать доступными или не доступными пункты меню undoMenuItem и redoMenuItem.
     @Override
     public void menuSelected(MenuEvent e) {
-
+        undoMenuItem.setEnabled(view.canUndo());
+        redoMenuItem.setEnabled(view.canRedo());
     }
 
     @Override
