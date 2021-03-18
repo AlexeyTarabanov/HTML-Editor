@@ -123,6 +123,13 @@ import java.io.File;
   - реализовал метод undoableEditHappened(UndoableEditEvent e)
 
  Шаг 12.
+ 1. В классе RedoAction:
+  - реализовал метод actionPerformed(ActionEvent actionEvent)
+ 2. В классе UndoAction:
+  - реализовал метод actionPerformed(ActionEvent e)
+ 3. Реализовал классы SubscriptAction и SuperscriptAction
+
+ Шаг 13.
  1.
 
  */

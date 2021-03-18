@@ -15,5 +15,8 @@ public class RedoAction extends AbstractAction {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {}
+    public void actionPerformed(ActionEvent e) {
+        // возвращает ранее отмененное действие
+        view.redo();
+    }
 }
