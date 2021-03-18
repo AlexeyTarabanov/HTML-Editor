@@ -8,6 +8,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static com.javarush.task.task32.task3209.MenuHelper.*;
+
+
+
 public class View extends JFrame implements ActionListener {
 
     private Controller controller;
@@ -18,6 +22,17 @@ public class View extends JFrame implements ActionListener {
     private JTextPane htmlTextPane = new JTextPane();
     // компонент для редактирования html в виде текста
     private JEditorPane plainTextPane = new JEditorPane();
+
+    public View() {
+        // Определение внешнего вида (look and fill):
+        // Look and fill можно задать двумя различными способами:
+        // указав полное имя класса для look and fill или создав экземпляр LookAndFeel и передав его setLookAndFeel.
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            ExceptionHandler.log(e);
+        }
+    }
 
     public Controller getController() {
         return controller;
@@ -42,7 +57,21 @@ public class View extends JFrame implements ActionListener {
     }
 
     // инициализация меню
-    public void initMenuBar() {}
+    public void initMenuBar() {
+        // новый объект типа JMenuBar (это и будет наша панель меню)
+        JMenuBar menuBar = new JMenuBar();
+        // инициализируем меню в следующем порядке:
+        // Файл, Редактировать, Стиль, Выравнивание, Цвет, Шрифт и Помощь.
+        initFileMenu(this, menuBar);
+        initEditMenu(this, menuBar);
+        initStyleMenu(this, menuBar);
+        initAlignMenu(this, menuBar);
+        initColorMenu(this, menuBar);
+        initFontMenu(this, menuBar);
+        initHelpMenu(this, menuBar);
+        // добавил в верхнюю часть панели контента текущего фрейма нашу панель меню
+        getContentPane().add(menuBar, BorderLayout.NORTH);
+    }
 
     // инициализация панелей редактора
     public void initEditor() {

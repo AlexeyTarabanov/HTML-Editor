@@ -11,10 +11,20 @@ import javax.swing.text.StyledEditorKit;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+// // вспомогательный класс для инициализации и настройки меню
 public class MenuHelper {
+
+
     public static JMenuItem addMenuItem(JMenu parent, String text, ActionListener actionListener) {
+        // parent - меню в которое мы добавляем пункт,
+        // text - текст добавляемого пункта,
+        // actionListener - слушатель действий добавляемого пункта меню.
+
+        // создал новый пункт меню JMenuItem
         JMenuItem menuItem = new JMenuItem(text);
+        // установил этому пункту слушателя действий
         menuItem.addActionListener(actionListener);
+        // в parent добавил созданный пункт меню
         parent.add(menuItem);
         return menuItem;
     }
@@ -26,6 +36,8 @@ public class MenuHelper {
     }
 
     public static JMenuItem addMenuItem(JMenu parent, Action action) {
+        // parent - меню в которое мы добавляем пункт,
+        // action - действие, которое необходимо выполнить при выборе пункта меню
         JMenuItem menuItem = new JMenuItem(action);
         parent.add(menuItem);
         return menuItem;
@@ -77,6 +89,7 @@ public class MenuHelper {
         colorMenu.addMenuListener(new TextEditMenuListener(view));
     }
 
+    // инициализация меню выравнивания
     public static void initAlignMenu(View view, JMenuBar menuBar) {
         JMenu alignMenu = new JMenu("Выравнивание");
         menuBar.add(alignMenu);
@@ -88,6 +101,7 @@ public class MenuHelper {
         alignMenu.addMenuListener(new TextEditMenuListener(view));
     }
 
+    // инициализация меню выбора стиля текста
     public static void initStyleMenu(View view, JMenuBar menuBar) {
         JMenu styleMenu = new JMenu("Стиль");
         menuBar.add(styleMenu);
