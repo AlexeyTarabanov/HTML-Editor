@@ -106,8 +106,24 @@ import java.io.File;
   - canRedo() - можем повторить
 
  Шаг 11.
- 1.
+ 1. В классе View:
+  - добавил поле UndoManager undoManager и проинициализировал его
+  - добавил поле UndoListener undoListener и проинициализировал его. Добавил геттер
+  Добавил и реализовал методы:
+  - void undo() - отменяет последнее действие
+  - void redo() - возвращает ранее отмененное действие
+  - void resetUndo() - сбрасывает все правки в менеджере undoManager
+  Реализовал методы:
+  - canUndo() и canRedo()
+ 2. В пакете listeners:
+  - создал класс UndoListener реализующий интерфейс UndoableEditListener
+  (класс будет следить за правками, которые можно отменить или вернуть)
+ 3. В классе UndoListener:
+  - добавил поле UndoManager undoManager и конструктор с этим полем
+  - реализовал метод undoableEditHappened(UndoableEditEvent e)
 
+ Шаг 12.
+ 1.
 
  */
 

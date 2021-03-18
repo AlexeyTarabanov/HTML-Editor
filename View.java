@@ -2,8 +2,12 @@ package com.javarush.task.task32.task3209;
 
 import com.javarush.task.task32.task3209.listeners.FrameListener;
 import com.javarush.task.task32.task3209.listeners.TabbedPaneChangeListener;
+import com.javarush.task.task32.task3209.listeners.UndoListener;
 
 import javax.swing.*;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,6 +26,16 @@ public class View extends JFrame implements ActionListener {
     private JTextPane htmlTextPane = new JTextPane();
     // компонент для редактирования html в виде текста
     private JEditorPane plainTextPane = new JEditorPane();
+
+    // управляет списком UndoableEdits,
+    // предоставляя возможность отменить или повторить соответствующие изменения
+    private UndoManager undoManager = new UndoManager();
+    // следит за правками, которые можно отменить или вернуть
+    private UndoListener undoListener = new UndoListener(undoManager);
+
+    public UndoListener getUndoListener() {
+        return undoListener;
+    }
 
     public View() {
         // Определение внешнего вида (look and fill):
@@ -103,13 +117,37 @@ public class View extends JFrame implements ActionListener {
         pack();
     }
 
-    // можем ли мы отменить действие
-    public boolean canUndo() {
-        return false;
+    // отменяет последнее действие
+    public void undo() {
+        try {
+            undoManager.undo();
+        } catch (CannotUndoException e) {
+            ExceptionHandler.log(e);
+        }
     }
 
-    public boolean  canRedo() {
-        return false;
+    // возвращает ранее отмененное действие
+    public void redo() {
+        try {
+            undoManager.redo();
+        } catch (CannotRedoException e) {
+            ExceptionHandler.log(e);
+        }
+    }
+
+    // можем ли мы отменить действие
+    public boolean canUndo() {
+        return undoManager.canUndo();
+    }
+
+    // можем ли мы вернуть отмененное действие
+    public boolean canRedo() {
+        return undoManager.canRedo();
+    }
+
+    // сбрасывает все правки в менеджере undoManager
+    public void resetUndo() {
+        undoManager.discardAllEdits();
     }
 
     public void exit() {
