@@ -81,7 +81,20 @@ import java.io.File;
   - initFileMenu(View view, JMenuBar menuBar) - инициализация меню Файл
 
  Шаг 8.
+ 1. Создал пакет actions,
+    в нем создал заглушки для следующих классов:
+  - класс отмены действия - UndoAction.
+  - класс возврата действия - RedoAction
+  - класс StrikeThroughAction - отвечает за стиль текста "Зачеркнутый"
+  - класс SubscriptAction - отвечает за стиль текста "Подстрочный знак"
+  - класс SuperscriptAction - отвечает за стиль "Надстрочный знак"
+ 2. В пакете listeners, создал заглушки для следующих классов:
+  - класс UndoMenuListener
+  - класс TextEditMenuListener
+
+ Шаг 9.
  1.
+
  */
 
 public class Controller {
