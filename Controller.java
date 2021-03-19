@@ -175,7 +175,13 @@ import java.io.StringWriter;
  у которых наше представление указано в виде слушателя событий)
 
  Шаг 20.
+ 1. В классе Controller:
+  - реализовал метод createNewDocument()
+  - реализовал метод инициализации init()
+
+ Шаг 21.
  1.
+
  */
 
 public class Controller {
@@ -197,6 +203,7 @@ public class Controller {
 
     // инициализирует
     public void init() {
+        createNewDocument();
     }
 
     public void exit() {
@@ -263,6 +270,14 @@ public class Controller {
     }
 
     public void createNewDocument() {
+        // выбираем html вкладку
+        view.selectHtmlTab();
+        // сбрасываем текущий документ
+        resetDocument();
+        // устанавливаем новый заголовок окна
+        view.setTitle("HTML редактор");
+        // обнуляем переменную currentFile
+        currentFile = null;
     }
 
     public void openDocument() {
