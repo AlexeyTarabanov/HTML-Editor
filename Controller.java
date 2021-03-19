@@ -6,6 +6,7 @@ import javax.swing.text.html.HTMLEditorKit;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 
 /**
  HTML Editor
@@ -158,6 +159,11 @@ import java.io.StringReader;
  (будет записывать переданный текст с html тегами в документ document)
 
  Шаг 17.
+ 1. В классе Controller:
+ - объявил и реализовал метод getPlainText()
+ (получает текст из документа со всеми html тегами)
+
+ Шаг 18.
  1.
 
  */
@@ -220,6 +226,20 @@ public class Controller {
             // логируем исключение
             ExceptionHandler.log(e);
         }
+    }
+
+    // получает текст из документа со всеми html тегами
+    public String getPlainText() {
+
+        StringWriter writer = new StringWriter();
+        try {
+            // переписыавеи все содержимое из документа document в созданный объект
+            new HTMLEditorKit().write(writer, document, 0, document.getLength());
+        } catch (IOException | BadLocationException e) {
+            ExceptionHandler.log(e);
+        }
+
+        return writer.toString();
     }
 
     public static void main(String[] args) {
