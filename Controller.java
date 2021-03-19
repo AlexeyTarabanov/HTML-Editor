@@ -1,8 +1,11 @@
 package com.javarush.task.task32.task3209;
 
+import javax.swing.text.BadLocationException;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
 import java.io.File;
+import java.io.IOException;
+import java.io.StringReader;
 
 /**
  HTML Editor
@@ -147,8 +150,14 @@ import java.io.File;
  Шаг 15.
  1. В классе Controller:
   - объявил и реализовал метод resetDocument()
+ (сбрасывает текущий документ)
 
  Шаг 16.
+ 1. В классе Controller:
+  - объявил и реализовал метод setPlainText(String text)
+ (будет записывать переданный текст с html тегами в документ document)
+
+ Шаг 17.
  1.
 
  */
@@ -194,6 +203,23 @@ public class Controller {
         document.addUndoableEditListener(view.getUndoListener());
         // получает документ у контроллера и устанавливает его в панель редактирования htmlTextPane
         view.update();
+    }
+
+    // будет записывать переданный текст с html тегами в документ document
+    public void setPlainText(String text) {
+        // сбравсывает документ
+        resetDocument();
+        // StringReader – простейшая реализация абстрактного класса Reader.
+        // В отличие от FileReader, он работает не с данными в файле на диске, а со строкой (String) находящейся в памяти Java-машины.
+        StringReader reader = new StringReader(text);
+        //
+        try {
+            // читаем данные из ридера в документ
+            new HTMLEditorKit().read(reader, document, 0);
+        } catch (IOException | BadLocationException e) {
+            // логируем исключение
+            ExceptionHandler.log(e);
+        }
     }
 
     public static void main(String[] args) {
