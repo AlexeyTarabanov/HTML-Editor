@@ -136,6 +136,14 @@ import java.io.File;
   - добавил метод boolean isHtmlTabSelected()
 
  Шаг 14.
+ 1. В классе View, объявил и реализовал методы:
+  - selectHtmlTab() - выбирает вкладку html и сбрасывает все правки
+  - update() - получает документ у контроллера и устанавливает его в панель редактирования htmlTextPane
+  - showAbout() - показывает диалоговое окно с информацией о программе
+ 2. В классе Controller:
+  - добавил геттер для модели, в нашем случае это поле document
+
+ Шаг 15.
  1.
 
  */
@@ -151,6 +159,10 @@ public class Controller {
 
     public Controller(View view) {
         this.view = view;
+    }
+
+    public HTMLDocument getDocument() {
+        return document;
     }
 
     // инициализирует

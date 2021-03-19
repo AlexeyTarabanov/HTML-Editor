@@ -58,7 +58,6 @@ public class View extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
     }
 
     // инициализирует
@@ -153,6 +152,24 @@ public class View extends JFrame implements ActionListener {
     // сбрасывает все правки в менеджере undoManager
     public void resetUndo() {
         undoManager.discardAllEdits();
+    }
+
+    // выбирает вкладку html и сбрасывает все правки
+    public void selectHtmlTab() {
+        tabbedPane.setSelectedIndex(0);
+        resetUndo();
+    }
+
+    // получает документ у контроллера и устанавливает его в панель редактирования htmlTextPane
+    public void update() {
+        htmlTextPane.setDocument(controller.getDocument());
+    }
+
+    // показывает диалоговое окно с информацией о программе
+    // https://www.youtube.com/watch?v=VSmPw86zcZA
+    public void showAbout() {
+        JOptionPane.showMessageDialog(getContentPane(), "information",
+                "information", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void exit() {
