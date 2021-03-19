@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import static com.javarush.task.task32.task3209.MenuHelper.*;
 
 
-
 public class View extends JFrame implements ActionListener {
 
     private Controller controller;
@@ -176,6 +175,18 @@ public class View extends JFrame implements ActionListener {
         controller.exit();
     }
 
+    // метод вызывается, когда произошла смена выбранной вкладки
     public void selectedTabChanged() {
+        // если выбрана вкладка с индексом 0 (html вкладка), значит нам нужно получить текст из plainTextPane
+        if (tabbedPane.getSelectedIndex() == 0) {
+            controller.setPlainText(plainTextPane.getText());
+        }
+        // если выбрана вкладка с индексом 1 (вкладка с html текстом),
+        // то необходимо получить текст у контроллера и установить его в панель plainTextPane.
+        else {
+            plainTextPane.setText(controller.getPlainText());
+        }
+        // сбрасываем правки
+        resetUndo();
     }
 }
