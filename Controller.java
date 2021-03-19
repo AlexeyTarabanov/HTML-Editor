@@ -130,6 +130,12 @@ import java.io.File;
  3. Реализовал классы SubscriptAction и SuperscriptAction
 
  Шаг 13.
+ 1. В пакете listeners:
+  - реализовал класс TextEditMenuListener
+ 2. В классе View:
+  - добавил метод boolean isHtmlTabSelected()
+
+ Шаг 14.
  1.
 
  */

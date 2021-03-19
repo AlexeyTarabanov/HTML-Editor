@@ -145,6 +145,11 @@ public class View extends JFrame implements ActionListener {
         return undoManager.canRedo();
     }
 
+    //  Он должен возвращать true, если выбрана вкладка, отображающая html в панели вкладок (подсказка: ее индекс 0).
+    public boolean isHtmlTabSelected() {
+        return tabbedPane.getSelectedIndex() == 0;
+    }
+
     // сбрасывает все правки в менеджере undoManager
     public void resetUndo() {
         undoManager.discardAllEdits();
