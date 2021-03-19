@@ -169,9 +169,13 @@ import java.io.StringWriter;
  (метод вызывается, когда произошла смена выбранной вкладки)
 
  Шаг 19.
+ 1. В классе View:
+ - реализовал метод actionPerformed(ActionEvent actionEvent)
+ (метод наследуется от интерфейса ActionListener и будет вызваться при выборе пунктов меню,
+ у которых наше представление указано в виде слушателя событий)
+
+ Шаг 20.
  1.
-
-
  */
 
 public class Controller {
@@ -256,5 +260,17 @@ public class Controller {
         view.setController(controller);
         view.init();
         controller.init();
+    }
+
+    public void createNewDocument() {
+    }
+
+    public void openDocument() {
+    }
+
+    public void saveDocument() {
+    }
+
+    public void saveDocumentAs() {
     }
 }

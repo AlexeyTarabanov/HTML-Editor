@@ -55,8 +55,34 @@ public class View extends JFrame implements ActionListener {
         this.controller = controller;
     }
 
+    // будет вызваться при выборе пунктов меню,
+    // у которых наше представление указано в виде слушателя событий
     @Override
     public void actionPerformed(ActionEvent e) {
+        // получил из события команду
+        String command = e.getActionCommand();
+        switch (command) {
+            case "Новый":
+                controller.createNewDocument();
+                break;
+            case "Открыть":
+                controller.openDocument();
+                break;
+            case "Сохранить":
+                controller.saveDocument();
+                break;
+            case "Сохранить как...":
+                controller.saveDocumentAs();
+                break;
+            case "Выход":
+                controller.exit();
+                break;
+            case "О программе":
+                showAbout();
+                break;
+            default:
+                System.out.println("Неизвестная команда");
+        }
     }
 
     // инициализирует
