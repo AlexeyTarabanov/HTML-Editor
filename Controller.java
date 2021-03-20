@@ -1,12 +1,10 @@
 package com.javarush.task.task32.task3209;
 
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 
 /**
  HTML Editor
@@ -184,6 +182,10 @@ import java.io.StringWriter;
   - реализовал методы accept(File file) и getDescription()
 
  Шаг 22.
+ 1. В классе Controller:
+ - реализовал метод saveDocumentAs()
+
+ Шаг 23.
  1.
 
  */
@@ -291,5 +293,29 @@ public class Controller {
     }
 
     public void saveDocumentAs() {
+        // выбираем html вкладку
+        view.selectHtmlTab();
+        // создаем новый объект для выбора файла JFileChooser
+        JFileChooser fileChooser = new JFileChooser();
+        // устанавливаем ему в качестве фильтра объект HTMLFileFilter
+        fileChooser.setFileFilter(new HTMLFileFilter());
+        // устанавливаем имя диалогового окна
+        fileChooser.setDialogTitle("Save File");
+        // показываем диалоговое окно "Save File" для выбора файла.
+        int result = fileChooser.showSaveDialog(view);
+        // если пользователь подтвердит выбор файла:
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // сохраняем выбранный файл в поле currentFile
+            currentFile = fileChooser.getSelectedFile();
+            // устанвливаем имя файла в качестве заголовка окна представления
+            view.setTitle(currentFile.getName());
+            // создаем FileWriter на базе currentFile
+            try (FileWriter writer = new FileWriter(currentFile)){
+                // переписыавеи все содержимое из документа document в созданный объект
+                new HTMLEditorKit().write(writer, document, 0, document.getLength());
+            } catch (IOException | BadLocationException e) {
+                ExceptionHandler.log(e);
+            }
+        }
     }
 }
