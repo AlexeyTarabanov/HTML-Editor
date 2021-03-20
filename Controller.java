@@ -148,12 +148,12 @@ import java.io.*;
 
  Шаг 15.
  1. В классе Controller:
-  - объявил и реализовал метод resetDocument()
+ - объявил и реализовал метод resetDocument()
  (сбрасывает текущий документ)
 
  Шаг 16.
  1. В классе Controller:
-  - объявил и реализовал метод setPlainText(String text)
+ - объявил и реализовал метод setPlainText(String text)
  (будет записывать переданный текст с html тегами в документ document)
 
  Шаг 17.
@@ -163,7 +163,7 @@ import java.io.*;
 
  Шаг 18.
  1. В классе View:
-  - реализовал метод selectedTabChanged()
+ - реализовал метод selectedTabChanged()
  (метод вызывается, когда произошла смена выбранной вкладки)
 
  Шаг 19.
@@ -174,18 +174,23 @@ import java.io.*;
 
  Шаг 20.
  1. В классе Controller:
-  - реализовал метод createNewDocument()
-  - реализовал метод инициализации init()
+ - реализовал метод createNewDocument()
+ - реализовал метод инициализации init()
 
  Шаг 21.
  1. Создал класс HTMLFileFilter унаследованный от FileFilter
-  - реализовал методы accept(File file) и getDescription()
+ - реализовал методы accept(File file) и getDescription()
 
  Шаг 22.
  1. В классе Controller:
  - реализовал метод saveDocumentAs()
 
  Шаг 23.
+ 1. В классе Controller:
+ - реализовал метод saveDocument()
+ - реализовал метод openDocument()
+
+ Шаг 24.
  1.
 
  */
@@ -249,6 +254,7 @@ public class Controller {
             // логируем исключение
             ExceptionHandler.log(e);
         }
+        reader.close();
     }
 
     // получает текст из документа со всеми html тегами
@@ -287,9 +293,52 @@ public class Controller {
     }
 
     public void openDocument() {
+        // выбираем html вкладку
+        view.selectHtmlTab();
+        // создаем новый объект для выбора файла JFileChooser
+        JFileChooser fileChooser = new JFileChooser();
+        // устанавливаем ему в качестве фильтра объект HTMLFileFilter
+        fileChooser.setFileFilter(new HTMLFileFilter());
+        // устанавливаем имя диалогового окна
+        fileChooser.setDialogTitle("Open File");
+        // показываем диалоговое окно "Save File" для выбора файла.
+        int result = fileChooser.showOpenDialog(view);
+        // если пользователь подтвердит выбор файла:
+        if (result == JFileChooser.APPROVE_OPTION) {
+            // устанавливаем новое значение currentFile
+            currentFile = fileChooser.getSelectedFile();
+            // сбрасываем документ
+            resetDocument();
+            // устанвливаем имя файла в качестве заголовка окна представления
+            view.setTitle(currentFile.getName());
+            try {
+                FileReader reader = new FileReader(currentFile);
+                // читаем данные из FileReader-а в документ document с помощью объекта класса HTMLEditorKit.
+                new HTMLEditorKit().read(reader, document, 0);
+                // сбрасывает все правки
+                view.resetUndo();
+                reader.close();
+            } catch (IOException | BadLocationException e) {
+                ExceptionHandler.log(e);
+            }
+        }
     }
 
     public void saveDocument() {
+        // выбираем html вкладку
+        view.selectHtmlTab();
+        if (currentFile != null) {
+            try {
+                FileWriter writer = new FileWriter(currentFile);
+                // переписыавеи все содержимое из документа document в созданный объект
+                new HTMLEditorKit().write(writer, document, 0, document.getLength());
+                writer.close();
+            } catch (IOException | BadLocationException e) {
+                ExceptionHandler.log(e);
+            }
+        } else {
+            saveDocumentAs();
+        }
     }
 
     public void saveDocumentAs() {
@@ -310,9 +359,11 @@ public class Controller {
             // устанвливаем имя файла в качестве заголовка окна представления
             view.setTitle(currentFile.getName());
             // создаем FileWriter на базе currentFile
-            try (FileWriter writer = new FileWriter(currentFile)){
+            try {
+                FileWriter writer = new FileWriter(currentFile);
                 // переписыавеи все содержимое из документа document в созданный объект
                 new HTMLEditorKit().write(writer, document, 0, document.getLength());
+                writer.close();
             } catch (IOException | BadLocationException e) {
                 ExceptionHandler.log(e);
             }
