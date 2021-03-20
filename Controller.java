@@ -180,6 +180,10 @@ import java.io.StringWriter;
   - реализовал метод инициализации init()
 
  Шаг 21.
+ 1. Создал класс HTMLFileFilter унаследованный от FileFilter
+  - реализовал методы accept(File file) и getDescription()
+
+ Шаг 22.
  1.
 
  */
